@@ -1,22 +1,29 @@
 const mongoose = require('mongoose')
 
+
+
 const productSchema = mongoose.Schema(
     {
-        name: {
+        name : {
             type : String,
-            required : [true , " Kindly enter a product name "]
+            required : [true , " Please enter a name "],
+
         },
-        quantity: {
-            type : Number,
-            required : [true , " You need to enter the quantity "],
+        description : {
+            type : String,
+            required : [ true ],
             default:0,
         },
-        price: {
+        price : {
             type : Number,
             required : true
         },
-        image: {
+        category : {
             type : String,
+            required : false 
+        },
+        reviews : {
+            type : Array,
             required : false 
         }
     },
@@ -25,6 +32,33 @@ const productSchema = mongoose.Schema(
     }
 )
 
-const Product = mongoose.model('Product' , productSchema);
+const  reviewSchema= mongoose.Schema(
+    {
+        content: {
+            type : String,
+            required : [true , " Please give us review for future changes"]
+        },
+        rating: {
+            type : Number,
+            required : [true , " Kindly visit us again"],
+            default:0,
+        },
+        author: {
+            type : String,
+            required : true
+        },
+        createdAt: {
+            type : Date,
+            required : false 
+        }
+    },
+    {
+        timestamps: true,
+    }
+)
+
+const Product = mongoose.model(' Product ' , productSchema);
+const Review = mongoose.model(' Review ' , reviewSchema);
 
 module.exports = Product;
+module.exports = Review;
